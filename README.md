@@ -1,1 +1,1 @@
-# Предпроект, задача 2.3.1.
+# CRUD, Spring realisation
