@@ -1,40 +1,34 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <html>
 <head>
-    <div align="center">
-    <title>Users</title>
-    <h2>Users</h2>
+    <div align="center" style="margin-top: 30px">
+        <title>Edit user</title>
+        <h3>Edit user</h3>
     </div>
 </head>
 <body>
+<c:url value="/admin/edit" var="var"/>
 <div align="center">
-<style> a {text-decoration: none;}</style>
-<table border="1" cellpadding="5">
-    <tr>
-        <th>№</th>
-        <th>Name</th>
-        <th>Password</th>
-        <th>Email</th>
-        <th>Action</th>
-    </tr>
-<c:forEach var="tmp" items="${userList}">
-    <tr>
-        <td align="center">${tmp.id}</td>
-        <td> ${tmp.name}</td>
-        <td>${tmp.password}</td>
-        <td>${tmp.email}</td>
-        <td>
-        <a href="/edit/${tmp.id}">Edit</a>
-        <a href="/delete/${tmp.id}">Delete</a>
-        </td>
-    </tr>
-</c:forEach>
-</table>
-<br>
-<c:url value="/adduser" var="add"/>
-<a href="${add}">Add new user</a>
+    <form action="${var}" method="POST" >
+        <input type="hidden" name="id" value="${user.id}"required>
+
+        <label for="login">Login</label>
+        <input type="text" name="login" id="login" value="${user.login}"required>
+
+        <label for="password">Пароль</label>
+        <input type="text" name="password" id="password" value="${user.password}"required>
+
+        <input type="checkbox" name="AddAdmin" value="add">
+        <label>make Admin</label>
+
+        <input type="submit" value="Edit user">
+    </form>
+    <style> a {text-decoration: none;}</style>
+    <a href="<c:url value="/logout" />">Logout</a>
+    <a href="<c:url value="/admin/users" />">Users</a>
 </div>
 </body>
 </html>
+

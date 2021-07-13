@@ -1,5 +1,6 @@
 package web.dao;
 
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 import web.model.User;
 
@@ -30,11 +31,19 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getAllUsers() {
-        return em.createQuery("from usersEntity").getResultList();
+        List<User> userList = em.createQuery("from usersEntity u join fetch u.roles ").getResultList();
+        return userList;
     }
 
     @Override
     public User getUserById(long id) {
         return em.find(User.class, id);
+    }
+
+    @Override
+    public User getUserByName(String name) {
+        User user = (User) em.createQuery("from usersEntity u where u.login=:name").setParameter("name", name).getSingleResult();
+        Hibernate.initialize(user.getRoles());
+        return user;
     }
 }

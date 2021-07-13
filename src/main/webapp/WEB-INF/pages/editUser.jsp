@@ -3,33 +3,31 @@
 
 <html>
 <head>
-    <div align="center">
-    <title>Edit user</title>
-    <h3>Edit user</h3>
+    <div align="center" style="margin-top: 30px">
+        <title>Edit user</title>
+        <h3>Edit user</h3>
     </div>
 </head>
 <body>
-<c:url value="/edit" var="var"/>
+<c:url value="/admin/edit" var="var"/>
 <div align="center">
-
-    <form action="${var}" method="POST">
+    <form action="${var}" method="POST" >
         <input type="hidden" name="id" value="${user.id}"required>
 
-        <label for="name">Имя</label>
-        <input type="text" name="name" id="name" value="${user.name}"required>
+        <label for="login">Login</label>
+        <input type="text" name="login" id="login" value="${user.login}"required>
 
         <label for="password">Пароль</label>
-        <input type="password" name="password" id="password" value="${user.password}"required>
-        <label><input type="checkbox" class="password-checkbox"> Показать пароль</label>
+        <input type="text" name="password" id="password" value="${user.password}"required>
 
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" value="${user.email}"required>
+        <input type="checkbox" name="AddAdmin" value="add">
+        <label>make Admin</label>
 
         <input type="submit" value="Edit user">
-
     </form>
     <style> a {text-decoration: none;}</style>
-    <a href="/">To main page</a>
+    <a href="<c:url value="/logout" />">Logout</a>
+    <a href="<c:url value="/admin/users" />">Users</a>
 </div>
 </body>
 </html>
